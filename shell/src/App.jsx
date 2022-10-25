@@ -1,5 +1,6 @@
 import minimaLogo from './minima_logo.png';
 import './App.css';
+import Balance from './Balance';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <p>
           Edit <code>src/App.jsx</code>.
         </p>
+        <Balance />
       </section>
     </div>
   );
