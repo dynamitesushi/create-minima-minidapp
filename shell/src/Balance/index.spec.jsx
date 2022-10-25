@@ -1,10 +1,10 @@
 import Balance from './index';
 import { render, screen, waitFor } from '@testing-library/react';
-import * as wrapper from '../wrapper/index';
+import * as minima from '../minima/index';
 
 describe('<Balance />', () => {
     beforeEach(() => {
-        jest.spyOn(wrapper, 'fetchBalance').mockResolvedValue([
+        jest.spyOn(minima, 'fetchBalance').mockResolvedValue([
             {
                 "token": "Minima",
                 "tokenid": "0x00",

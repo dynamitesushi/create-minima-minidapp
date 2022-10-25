@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchBalance } from '../wrapper/index';
+import { fetchBalance } from '../minima/index';
 
 const Balance = () => {
     const [balance, setBalance] = React.useState(null);
