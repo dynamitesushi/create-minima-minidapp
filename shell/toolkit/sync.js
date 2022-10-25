@@ -5,12 +5,13 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const jsdom = require("jsdom");
 
-const port = 9001;
-const mdsPort = port + 2;
-const rpcPort = port + 4;
-
 const envFile = './.env';
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+
+const env = fs.readFileSync('./.env', 'utf-8');
+
+const mdsPort = Number(env.match(/(?<=REACT_APP_DEBUG_MDS_PORT=).*/)[0]);
+const rpcPort = Number(env.match(/(?<=REACT_APP_DEBUG_RPC_PORT=).*/)[0]);
 
 const orderRecentFiles = (dir) =>
     fs.readdirSync(dir)
@@ -24,7 +25,10 @@ const getMostRecentFile = (dir) => {
 };
 
 async function checkIfAppIsInstalled(appName){
-    const mds = await axios.get(`http://127.0.0.1:${rpcPort}/mds`);
+    const mds = await axios.get(`http://127.0.0.1:${rpcPort}/mds`).then(() => {
+        console.log('Skipping automatic enviorment setup, please check RPC is running on port 9005.');
+        console.log('Please fill out "REACT_APP_DEBUG_UID" manually.')
+    });
     return mds.data.response.minidapps.find(app => app.conf.name === appName);
 }
 

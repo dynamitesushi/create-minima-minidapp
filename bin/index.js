@@ -26,9 +26,15 @@ const questions = [
   },
   {
     name: 2,
-    message: 'The port minima is running on',
+    message: 'What port is MDS running on?',
     type: 'input',
-    default: '9001'
+    default: '9003'
+  },
+  {
+    name: 3,
+    message: 'What port is RPC running on?',
+    type: 'input',
+    default: '9005'
   },
   {
     name: 3,
@@ -65,10 +71,15 @@ const questions = [
 
         if (answers[2] !== questions[1].default) {
           const envFile = fs.readFileSync(dir + '/.env', 'utf-8');
-          fs.writeFileSync(dir + '/.env', envFile.replace(/REACT_APP_DEBUG_PORT=?.+\n/, `REACT_APP_DEBUG_PORT=${Number(answers[2]) + 2}\n`));
+          fs.writeFileSync(dir + '/.env', envFile.replace(/REACT_APP_DEBUG_MDS_PORT=?.+\n/, `REACT_APP_DEBUG_MDS_PORT=${Number(answers[2]) + 2}\n`));
         }
 
-        if (answers[3]) {
+        if (answers[3] !== questions[2].default) {
+          const envFile = fs.readFileSync(dir + '/.env', 'utf-8');
+          fs.writeFileSync(dir + '/.env', envFile.replace(/REACT_APP_DEBUG_RPC_PORT=?.+\n/, `REACT_APP_DEBUG_RPC_PORT=${Number(answers[2]) + 2}\n`));
+        }
+
+        if (answers[4]) {
           await sync();
         }
 
