@@ -69,18 +69,20 @@ const questions = [
           fs.writeFileSync(dir + '/package.json', packageJson.replace(/"my-minima-minidapp"/, `"${answers[1].toLowerCase().replace(' ', '-')}"`));
         }
 
-        if (answers[2] !== questions[1].default) {
-          const envFile = fs.readFileSync(dir + '/.env', 'utf-8');
-          fs.writeFileSync(dir + '/.env', envFile.replace(/REACT_APP_DEBUG_MDS_PORT=?.+\n/, `REACT_APP_DEBUG_MDS_PORT=${Number(answers[2]) + 2}\n`));
-        }
-
-        if (answers[3] !== questions[2].default) {
-          const envFile = fs.readFileSync(dir + '/.env', 'utf-8');
-          fs.writeFileSync(dir + '/.env', envFile.replace(/REACT_APP_DEBUG_RPC_PORT=?.+\n/, `REACT_APP_DEBUG_RPC_PORT=${Number(answers[2]) + 2}\n`));
-        }
-
         if (answers[4]) {
-          await sync();
+          if (!fs.existsSync(dir + './env')) {
+            fs.writeFileSync(dir + './env', 'REACT_APP_DEBUG=true\nREACT_APP_DEBUG_HOST=localhost\nREACT_APP_DEBUG_MDS_PORT=9003\nREACT_APP_DEBUG_RPC_PORT=9005\nREACT_APP_DEBUG_UID=\n')
+          }
+
+          if (answers[2] !== questions[1].default) {
+            const envFile = fs.readFileSync(dir + '/.env', 'utf-8');
+            fs.writeFileSync(dir + '/.env', envFile.replace(/REACT_APP_DEBUG_MDS_PORT=?.+\n/, `REACT_APP_DEBUG_MDS_PORT=${Number(answers[2]) + 2}\n`));
+          }
+  
+          if (answers[3] !== questions[2].default) {
+            const envFile = fs.readFileSync(dir + '/.env', 'utf-8');
+            fs.writeFileSync(dir + '/.env', envFile.replace(/REACT_APP_DEBUG_RPC_PORT=?.+\n/, `REACT_APP_DEBUG_RPC_PORT=${Number(answers[2]) + 2}\n`));
+          }
         }
 
         log(`----------------------------------------`);
