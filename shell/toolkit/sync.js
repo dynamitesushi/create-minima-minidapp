@@ -25,7 +25,7 @@ const getMostRecentFile = (dir) => {
 };
 
 async function checkIfAppIsInstalled(appName){
-    const mds = await axios.get(`http://127.0.0.1:${rpcPort}/mds`).then(() => {
+    const mds = await axios.get(`http://127.0.0.1:${rpcPort}/mds`).catch(() => {
         console.log('Skipping automatic enviorment setup, please check RPC is running on port 9005.');
         console.log('Please fill out "REACT_APP_DEBUG_UID" manually.')
     });
