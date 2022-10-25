@@ -37,7 +37,7 @@ const questions = [
     default: '9005'
   },
   {
-    name: 3,
+    name: 4,
     message: 'Would you like the cli to set up the .env file for you automatically?',
     type: "confirm",
   }
