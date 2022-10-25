@@ -70,8 +70,8 @@ const questions = [
         }
 
         if (answers[4]) {
-          if (!fs.existsSync(dir + './env')) {
-            fs.writeFileSync(dir + './env', 'REACT_APP_DEBUG=true\nREACT_APP_DEBUG_HOST=localhost\nREACT_APP_DEBUG_MDS_PORT=9003\nREACT_APP_DEBUG_RPC_PORT=9005\nREACT_APP_DEBUG_UID=\n')
+          if (!fs.existsSync(dir + '/.env')) {
+            fs.writeFileSync(dir + '/.env', 'REACT_APP_DEBUG=true\nREACT_APP_DEBUG_HOST=localhost\nREACT_APP_DEBUG_MDS_PORT=9003\nREACT_APP_DEBUG_RPC_PORT=9005\nREACT_APP_DEBUG_UID=\n')
           }
 
           if (answers[2] !== questions[1].default) {
