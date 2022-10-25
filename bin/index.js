@@ -13,10 +13,6 @@ const npmInstall = () => {
   return exec(`cd ${dir}; npm install --quiet;`);
 }
 
-const sync = () => {
-  return exec(`cd ${dir}; node ./toolkit/sync.js;`);
-}
-
 const questions = [
   {
     name: 1,
