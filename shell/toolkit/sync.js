@@ -83,8 +83,12 @@ function getMinimaAppUID(password, appName) {
         }
     }
 
-    const password = await getMinimaMDSPassword();
-    const appUID = await getMinimaAppUID(password, conf.name);
-    const file = fs.readFileSync(envFile, 'utf-8');
-    fs.writeFileSync(envFile, file.replace(/REACT_APP_DEBUG_UID=?.+\n/, `REACT_APP_DEBUG_UID=${appUID}\n`));
+    try {
+        const password = await getMinimaMDSPassword();
+        const appUID = await getMinimaAppUID(password, conf.name);
+        const file = fs.readFileSync(envFile, 'utf-8');
+        fs.writeFileSync(envFile, file.replace(/REACT_APP_DEBUG_UID=?.+\n/, `REACT_APP_DEBUG_UID=${appUID}\n`));
+    } catch {
+        console.log('There was an issue setting up the env file, please create an issue in the github repository.');
+    }
 })();
